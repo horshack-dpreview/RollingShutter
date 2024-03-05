@@ -70,7 +70,34 @@ Note that changing shutter speed only reduces the visibility of banding when it'
 Based on the above relationship between light cycle frequency and sensor readout time, we can calculate the other when one is known. For example, if we know the light source is 60Hz (120 transitions/second) and the sensor captures 6 bands, we can calculate the sensor readout time via 1000/120*6, which is 50ms. Alternatively, if we know the sensor readout time is 50ms, we can calculate the light's cycling frequency via 1000/(50/6)*2.
 
 ## Measuring Methodology
-In 2018 a1ex at Magic Lantern took [Jim Kasson's original Z7 sensor readout method](https://blog.kasson.com/nikon-z6-7/how-fast-is-the-z7-silent-shutter/) and [applied it to measure various Canon bodies](https://www.magiclantern.fm/forum/index.php?topic=23040). For higher precision and easier reproducibility, a1ex cycled an LED on an Arduino board, whose frequency can be carefully controlled. He chose 500 Hz (1000 toggles/second). This frequency is convenient because it creates a simple 1ms per-transition relationship. This repository contains measurements on various cameras using a1ex's source code running on a [ELEGOO UNO R3 Board ATmega328](https://www.amazon.com/dp/B01EWOE0UU). Note that a "band" for this calculation is defined as a full cycle (Hz), meaning pairs of light/dark areas, each representing a transition of off->on->off. This is done because the duty cycle of the cycle may not be balanced 50% between on/off, due to alignment of the shutter speed relative to the phase of the light cycle.
+In 2018 a1ex at Magic Lantern took [Jim Kasson's original Z7 sensor readout method](https://blog.kasson.com/nikon-z6-7/how-fast-is-the-z7-silent-shutter/) and [applied it to measure various Canon bodies](https://www.magiclantern.fm/forum/index.php?topic=23040). For higher precision and easier reproducibility, a1ex cycled an LED on an Arduino board, whose frequency can be carefully controlled. He chose 500 Hz (1000 toggles/second). This frequency is convenient because it creates a simple 1ms per-transition relationship. This repository contains measurements on various cameras using a1ex's source code running on a [ELEGOO UNO R3 Board ATmega328](https://www.amazon.com/dp/B01EWOE0UU). 
+
+Here are the steps I use for calculating the sensor readout rate:
+
+ 1. Position the camera so that LED fills up as much of the frame as possible. This usually means putting the lens right up to the board. It works best with a macro or long focal length.
+ 2. Take photo of the LED
+ 3. Load the photo in Photoshop and measure the pixel height of as many valid bands I can visually distinguish
+ 4. Calculate the readout rate based on the image size vs height of the bands measured vs number of bands in measurement.
+
+For example, here's an image of the Arduino LED taken with a Nikon Z6 in 14-bit raw mode, overlaid with the Photoshop measuring tool, Info panel, and Image Size dialog:
+
+<p align="center">
+  <img src="https://photos.smugmug.com/photos/i-h9xFC3S/0/bRHnZJkjSxzBWqz7vk9tDNVXZKrHR7G6sbwgcjKD/O/i-h9xFC3S.jpg" />
+</p>
+
+Notice I didn't include the bands at the very top and bottom of the image in the measurement, as those aren't full-sized bands due to the elliptical projection of the LED. The measured height of the bands I included is 3642 pixels, shown in the Info pane. I then visually count the number of bands spanned by the measurement, which in this case is 23. Note that a "band" for this calculation is defined as a full cycle (Hz), meaning pairs of light/dark areas, each representing a transition of off->on->off. This is done because the duty cycle of the LED  may not be balanced 50% between on/off, due to alignment of the shutter speed relative to the phase of the light cycle, meaning the height of the light and dark areas may differ. Here is the calculation:
+
+ 1. Calculate # bands imaged on sensor as \(image height /  height of bands measured * number of bands measured\), which in this example is 4000 / 3642 \* 23, which comes to 25.2539 full bands. Note we are calculating the number of bands across the entire sensor based on the subset of bands we can measure, then projecting that subset for the entire sensor area to include the portions to not covered by the visible bands.
+ 2.  The readout speed in milliseconds is simply \(500 / number of full bands\), since the LED is being toggled at 500 Hz, so 500 / 25.2539, which comes to 19.79ms.
+ 3. The shutter-speed notation equivalent is calculated as 1000/19.79, which comes to 1/50
+
+I have automated this calculation in the LibreOffice Calc spreadsheet included in this repository, which has one sheet for every camera measured: 
+<p align="center">
+  <img src="https://photos.smugmug.com/photos/i-XpznsVD/0/DshXnVRdv263j3G8WtJJHpdtJzhXvW82vnf8BwXk3/O/i-XpznsVD.png" />
+</p>
+The green cells are entered values. The yellow cells are calculated by the spreadhseet using the above formulas. To add a new camera I simply duplicate one of the existing camera sheet tabs and overwrite the contents with the new camera's measurement.
+
+To measure video readout rates I record a short video clip of each major resolution/frame rate then use the scripts in the tool folder of this repository to invokve ffmpeg to extract the first i-frame from each video as a PNG, then measure that PNG in Photoshop the same as I do for still images.
 
 ## Measuring How-To Guide
 ### One-Time Setup
