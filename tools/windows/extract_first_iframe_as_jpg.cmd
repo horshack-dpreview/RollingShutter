@@ -6,4 +6,4 @@
 ::
 set param_dir=%~dp1
 set root_filename=%~n1
-ffmpeg -i %1 -frames:v 1 -f image2 -vf "select='eq(pict_type,PICT_TYPE_I)'" -vsync vfr -q:v 1 %param_dir%%root_filename%.jpg
+ffmpeg -i %1 -frames:v 1 -f image2 -vf "select='eq(pict_type,PICT_TYPE_I)'" -vsync vfr -q:v 1 "%param_dir%%root_filename%.jpg"
