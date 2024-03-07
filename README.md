@@ -162,6 +162,9 @@ Photo #6 (optionally) - If the camera offers different raw bit depth options, ch
 Photo #7 (optionally) - If the camera offers different raw compression options, choose the alternate option(s) and take another photo. For example, if the camera offers both uncompressed and lossless compressed, choose lossless for the second exposure.
 
  ### Video Tests
+ 
+ <span style="color:blue">**Important: Set your camera to NTSC mode if possible. The consolidated measurement comparisons all use NTSC frame rates.</span>.
+ 
  #### Exposure
 
  - Chose a shutter speed of 1/2000, ISO of 12,800, and the largest aperture supported by the lens (smallest f-stop number)
