@@ -163,7 +163,7 @@ Photo #7 (optionally) - If the camera offers different raw compression options, 
 
  ### Video Tests
  
- **Important: Set your camera to NTSC mode if possible. The consolidated measurement comparisons all use NTSC frame rates**
+ **Important: Set your camera to NTSC mode if possible. The consolidated measurements all use NTSC frame rates**
  
  #### Exposure
 
