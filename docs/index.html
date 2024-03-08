@@ -5406,7 +5406,9 @@
             target: [1,2,3,4,5,6,7,8,9,10,11],
             render: function (data, type, row) {
                 let displayFormat = $("#timeDisplayFormat").val();
-                if (type === "display" && data) { 
+                  // note we exclude type == "sort" from our formatting below so that sorting always occurs on millisecond values
+                  // we include "filter" in our formatting because users will enter filters based on what is presented to them
+                  if ((type == "display" || type == "filter") && data) { 
                     if (displayFormat === "sec")
                         return $.fn.dataTable.render.number(null, null, 0, "1/", null).display(parseFloat(1000/data));
                     else if (displayFormat === "ms")
