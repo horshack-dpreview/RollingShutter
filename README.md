@@ -155,7 +155,7 @@ Photo #2 - Take a photo with the above settings but with the camera set to JPEG-
 
 Photo #3,4 - Take a photo with the above settings but with the ISO set to 1600, and again with the ISO set to the maximum value. Return the ISO back to 12,800 after taking the photo. This is done for cameras that use different sensor readout rates  based on the ISO.
 
-Photo #5 - Switch the camera from single-shot to the fasted continuous shooting speed/mode offered and take another photo. If you accidentally take more than one photo for the continuous burst you can delete the extra photos. Switch the camera back to single-shot mode
+Photo #5 - Switch the camera from single-shot to the fasted continuous shooting speed/mode offered and take another photo. If you accidentally take more than one photo for the continuous burst you can delete the extra photos.  **Please shoot at least one of the continuous raw frames in compressed raw mode, since some cameras like Sony's will only drop the bit depth (and increase the sensor readout rate) when shooting both Continuous and Compressed.** Switch the camera back to single-shot mode
 
 Photo #6 (optionally) - If the camera offers different raw bit depth options, choose the alternate option and take another photo. For example, if both 14-bit and 12-bit options are available, the first photo is taken with 14-bit selected and the second with 12-bit. Return the camera back to the highest bit depth option when done.
 
@@ -182,5 +182,3 @@ Video Set #2 - Chose the next lower resolution offered in the camera. For exampl
 
 Continue through additional video sets if your camera offers more than 2 shooting resolution. For example, some cameras offer 8K, 4K, and 1080, which will produce three sets of videos.
 
- #### Extra Credit
- If possible, shoot a few sample videos at varying bit-depths (8-bit vs 10-bit) and chroma sampling rates (420 vs 422). You don't have to repeat the full matrix of sets above - one sample video at the varied bit depth and chroma sampling rate is sufficient.
