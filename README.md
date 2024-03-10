@@ -167,7 +167,7 @@ Photo #7 (optionally) - If the camera offers different raw compression options, 
  
  #### Exposure
 
- - Chose a shutter speed of 1/2000, ISO of 12,800, and the largest aperture supported by the lens (smallest f-stop number)
+ - Chose a shutter speed of 1/2000, ISO of 12,800, and the largest aperture supported by the lens (smallest f-stop number). Be careful to recheck the exposure settings after switching from stills to movie mode because many cameras keep separate exposure settings between the two modes and so your settings from the photo tests above may not automatically carry over when you switch to movie mode.
  
  #### Initial Camera Settings
    - Turn off body and/or lens stabilization
