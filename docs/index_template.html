@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css" />
 
     <style>
-        #readout_times {
-            /* prevent rendering of table until after DataTables has finished init */
+        #readout_times, #detailed_measurements {
+            /* prevent rendering of table and detailed results until after DataTables has finished init */
             display: none;
         }
+
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
@@ -34,7 +35,9 @@
 </div>
 
  <!-- TABLE -->
+<div id="detailed_measurements">
  <!-- ALL_MEASUREMENTS -->
+</div> <!-- #detailed_measurements -->
     
   <script type="text/javascript">
     $('#readout_times').DataTable( {
@@ -64,6 +67,7 @@
         },],
         "initComplete": function(){ 
             $("#readout_times").show(); 
+            $("#detailed_measurements").css("display", "block");
         }
     } );
       
