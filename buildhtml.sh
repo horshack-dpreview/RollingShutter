@@ -16,7 +16,7 @@ soffice --headless --convert-to csv:"Text - txt - csv (StarCalc)":44,34,UTF8,1,,
 # Run our awk script to convert the CSV into an HTML table formatted for use by 
 # the datatables library (https://datatables.net/)
 #
-awk -f csv_to_table.awk 'measurements-Combined Results (ms).csv' > table.txt
+awk -f csv_to_table.awk 'measurements-Combined Results (Full-Sensor, ms).csv' > table.txt
 
 
 #
@@ -41,7 +41,7 @@ sed '/<!-- ALL_MEASUREMENTS -->/r all_measurements.html' temp1.html > docs/index
 # Cleanup temporary files
 #
 rm table.txt
-rm 'measurements-Combined Results (ms).csv' 
+rm 'measurements-Combined Results (Full-Sensor, ms).csv' 
 rm temp1.html
 rm all_measurements.html
 rm measurements.html
