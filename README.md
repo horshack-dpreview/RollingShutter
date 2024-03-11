@@ -163,15 +163,14 @@ Photo #6 (optionally) - If the camera offers different raw bit depth options, ch
 Photo #7 (optionally) - If the camera offers different raw compression options, choose the alternate option(s) and take another photo. For example, if the camera offers both uncompressed and lossless compressed, choose lossless for the second exposure.
 
  ### Video Tests
- 
- **Important: Set your camera to NTSC mode if possible. The consolidated measurements all use NTSC frame rates**
- 
+  
  #### Exposure
 
  - Chose a shutter speed of 1/2000, ISO of 12,800, and the largest aperture supported by the lens (smallest f-stop number). Be careful to recheck the exposure settings after switching from stills to movie mode because many cameras keep separate exposure settings between the two modes and so your settings from the photo tests above may not automatically carry over when you switch to movie mode.
  
  #### Initial Camera Settings
-   - **Turn off all lens corrections - they will distort the projection of the LED bands and introduce error into the measurement. This is especially important for video because lens corrections are baked into the footage and can't be removed**
+   - **Turn off all lens corrections - they will distort the projection of the LED bands and introduce error into the measurement. This is especially important for video because lens corrections are baked into the footage and can't be removed.**
+   - **Set your camera to NTSC mode if possible. The consolidated measurements all use NTSC frame rates**
    - Turn off body and/or lens stabilization
    - Set the Autofocus mode to Manual if possible, and set the focus position to infinity. Make sure any video-specific continuous AF setting is off.
    - Set the highest quality video mode offered, first by resolution, then frame rate, then bit depth/color sampling. For example, choose 4K over 1080, 60p over 30p, 10-bit over 8-bit, 422 over 420, etc...
