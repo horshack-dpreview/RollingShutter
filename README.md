@@ -123,7 +123,7 @@ To measure video readout rates I record a short video clip of each major resolut
 </p>
 
  - If you don't have a macro lens, choose a lens with either a large magnification factor or one with a long focal length
- - If you have a choice between an adapted vs native lens, choose an adapted lens. For example, a Canon lens on a Sony body using the Sigma MC-11 adapter in preference over a native Sony E-Mount lens. This will eliminate the need to strip off the embeddd lens correction profiles associated with native lenses.
+ - If you have a choice between an adapted vs native lens, choose an adapted lens. For example, a Canon lens on a Sony body using the Sigma MC-11 adapter in preference over a native Sony E-Mount lens.
  
  #### Camera Positioning and Framing
  
@@ -139,6 +139,7 @@ To measure video readout rates I record a short video clip of each major resolut
 
  - Chose a shutter speed of 1/2000, ISO of 12,800, and the largest aperture supported by the lens (smallest f-stop number)
  #### Initial Camera Settings
+ - **Turn off all lens corrections - they will distort the projection of the LED bands and introduce error into the measurement**
  - Set the camera to the fully-electronic shutter mode. Do not select the EFCS or mechanical shutter modes. Some cameras only offer the electronic shutter mode when using a special setting on the mode dial - for example, the Canon M50 requires you to use the "Creative" mode setting and silent mode to access the electronic shutter.
  - Turn off body and/or lens stabilization
  - Set the camera to raw-only capture
@@ -170,6 +171,7 @@ Photo #7 (optionally) - If the camera offers different raw compression options, 
  - Chose a shutter speed of 1/2000, ISO of 12,800, and the largest aperture supported by the lens (smallest f-stop number). Be careful to recheck the exposure settings after switching from stills to movie mode because many cameras keep separate exposure settings between the two modes and so your settings from the photo tests above may not automatically carry over when you switch to movie mode.
  
  #### Initial Camera Settings
+   - **Turn off all lens corrections - they will distort the projection of the LED bands and introduce error into the measurement. This is especially important for video because lens corrections are baked into the footage and can't be removed**
    - Turn off body and/or lens stabilization
    - Set the Autofocus mode to Manual if possible, and set the focus position to infinity. Make sure any video-specific continuous AF setting is off.
    - Set the highest quality video mode offered, first by resolution, then frame rate, then bit depth/color sampling. For example, choose 4K over 1080, 60p over 30p, 10-bit over 8-bit, 422 over 420, etc...
