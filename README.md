@@ -99,6 +99,15 @@ The green cells are entered values. The yellow cells are calculated by the sprea
 
 To measure video readout rates I record a short video clip of each major resolution/frame rate then use the scripts in the tool folder of this repository to invokve ffmpeg to extract the first i-frame from each video as a PNG, then measure that PNG in Photoshop the same as I do for still images.
 
+### Lens Corrections
+It's critical to disable lens corrections when using LED images for readout measurements, particularly geometric distortion correction. This is because the banding we're measuring is a sensor phenomena, not optical - the projection of perfectly-horizontal bands in the resulting image is not from the lens but from the horizontal orientation of pixel rows on the sensor interacting with the rolling shutter readout of those rows. If we allow the camera or post-processing software to apply a geometric correction profile to these images it will create an inverse correction, for example turning pincushion distortion into barrel distortion (or vice versa), because it's applying correction to an already distortion-free image. Here's an animation demonstrating this effect (Nikon Z6 with 24-70 f/4 Z):
+<p align="center">
+  <img src="https://photos.smugmug.com/photos/i-JrSPpZC/0/Cz23sWx5V9QQ2DwXx46LS8R7xH2NcT2QvQf5vZVcK/O/i-JrSPpZC.png" />
+</p>
+Notice how the lens correction is inducing barrel distortion in this image of a cycling light. This causes the LED bands to be stretched apart, introducing error into our band-size/count measurements. Disabling corrections is especially important for video and jpegs because the correction is baked into the image, whereas the correction on raw images can be disabled in post for most cameras.
+
+An alternative to concerning ourselves with lens corrections is to use a lens that doesn't require material corrections, ie a well-corrected lens such as a macro lens, or better yet, an adapted lens for which no correction profile is available.
+
 ## Measuring How-To Guide
 ### One-Time Setup
 
