@@ -108,7 +108,7 @@ Notice how the lens correction is inducing barrel distortion in this image of a 
 
 An alternative to concerning ourselves with lens corrections is to use a lens that doesn't require material corrections, ie a well-corrected lens such as a macro lens, or better yet, an adapted lens for which no correction profile is available.
 
-## Measuring How-To Guide
+## Camera Submission How-To Guide
 ### One-Time Setup
 
 **Note: Photo measurements can only be performed on cameras that support an electronic shutter mode, ie not EFCS and not the mechanical shutter mode.**
