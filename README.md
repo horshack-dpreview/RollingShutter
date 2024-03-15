@@ -182,13 +182,15 @@ Photo #7 (optionally) - If the camera offers different raw compression options, 
    - **Set your camera to NTSC mode if possible. The consolidated measurements all use NTSC frame rates**
    - Turn off body and/or lens stabilization
    - Set the Autofocus mode to Manual if possible, and set the focus position to infinity. Make sure any video-specific continuous AF setting is off.
-   - Set the highest quality video mode offered, first by resolution, then frame rate, then bit depth/color sampling. For example, choose 4K over 1080, 60p over 30p, 10-bit over 8-bit, 422 over 420, etc...
+   - Set the highest quality video mode offered, first by resolution, then frame rate, then bit depth/color sampling. For example, choose 4K over 1080, 60p over 30p, 10-bit over 8-bit, 422 over 420, etc... If there's an oversampling setting/mode then please turn it on - note it may also be called "HQ" or "Fine" on your camera.
 
  #### Measurement Videos
  
- Video Set #1, Video #1 - Press you camera's video record button to start recording, then immediately press it again to record the shortest video you can (to keep the file sizes manageable). Choose the next offered frame rate for the current resolution. For example, if you started with 4K 60p, choose 4K 30p, and record another video. Continue to the next frame rate until reaching the lowest non-S&Q rate offered, which is typically either 30p or 24p
+ Video Set #1, Video #1 - Press you camera's video record button to start recording, then immediately press it again to record the shortest video you can (to keep the file sizes manageable). Choose the next offered frame rate for the current resolution. For example, if you started with 4K 60p, choose 4K 30p, and record another video. Continue to the next frame rate until reaching the lowest non-S&Q rate offered, which is typically either 30p or 24p. 
 
-Video Set #2 - Chose the next lower resolution offered in the camera. For example, if you started with 4K then choose 1080. Choose the highest frame rate offered for the lower resolution. For 1080 that's usually either 120p or 60p. Record a video. Choose the next offered frame rate for the current resolution, until reaching the lowest non-S&Q rate offered, which is typically either 30p or 24p
+If your camera offers a selectable oversampling mode (may be called "HQ" or "Fine"), which you were asked to turn on for the first capture set, and it applies to the resolution set you just shot (typically it's limited to 4K modes), please turn it off now and capture the same sequence of videos. Be sure to turn it back after capturing this additional subset of videos.
+
+Video Set #2 - Chose the next lower resolution offered in the camera. For example, if you started with 4K then choose 1080. Choose the highest frame rate offered for the lower resolution. For 1080 that's usually either 120p or 60p. Record a video. Choose the next offered frame rate for the current resolution, until reaching the lowest non-S&Q rate offered, which is typically either 30p or 24p.
 
 Continue through additional video sets if your camera offers more than 2 shooting resolution. For example, some cameras offer 8K, 4K, and 1080, which will produce three sets of videos.
 
