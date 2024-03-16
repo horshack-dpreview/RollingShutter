@@ -29,7 +29,7 @@ sed '/<!-- TABLE -->/r table.txt' docs/index_template.html > temp1.html
 # of the html (removing header/footer tags) and also renaming some elements within the body
 #
 soffice --headless --convert-to html measurements.ods 
-sed  '1,/<body>/d' measurements.html  | sed -e 's/Overview/Detailed Results/' | sed '/<\/body>/,$d' > all_measurements.html
+sed  '1,/<A NAME=/d' measurements.html  | sed -e 's/<a name="\(.*\)"><h1>.*<em>\(.*\)<\/em><\/h1><\/a>/<a name="\2"<\/a>/i' | sed '/<\/body>/,$d' > all_measurements.html
 
 #
 # Add full results to temp1.html, saving output to final docs/index.html

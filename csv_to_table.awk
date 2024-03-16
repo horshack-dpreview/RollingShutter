@@ -28,11 +28,16 @@ BEGIN {
             # printing first row - insert a <tbody>
             print "\t<tbody>"
         }
-        numRowsPrinted++
         print "\t\t<tr>"
-        for (i=1; i<=NF; i++)
-            print "\t\t\t<td>"$i"</td>"
+        for (i=1; i<=NF; i++) {
+            if (i==1)
+                # first column is camera name. convert into a link of same name that links to detailed measurements
+                print "\t\t\t<td><a href=\"#"$i"\">"$i"</a></td>"
+            else
+                print "\t\t\t<td>"$i"</td>"
+        }
         print "\t\t</tr>"
+        numRowsPrinted++
     }
 }
 END {
