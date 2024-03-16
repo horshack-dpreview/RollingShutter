@@ -12,7 +12,7 @@ BEGIN {
 }
 /Model/ { # we start processing when we see the header line of the exported CSV
     printingTable=1
-    print "<table id=\"readout_times\" class=\"stripe\" style=\"width:100%\">"
+    print "<table id=\"readout_times\" class=\"stripe compact row-border order-column nowrap\" style=\"width:100%\">"
     print "\t<thead>"
     print "\t\t<tr>"
     for (i=1; i<=NF; i++)
