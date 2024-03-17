@@ -26,10 +26,12 @@ sed '/<!-- TABLE -->/r table.txt' docs/index_template.html > temp1.html
 
 #
 # generate HTML for the full results spreadsheet (written to measurements.html), extracting only the body
-# of the html (removing header/footer tags) and also renaming some elements within the body
+# of the html (removing header/footer tags). We also convert the HTML anchors created by the conversion from
+# anonymous values like table05 to values matching the sheet name, which allows us to create links to
+# each camera-specific sheet
 #
 soffice --headless --convert-to html measurements.ods 
-sed  '1,/<A NAME=/d' measurements.html  | sed -e 's/<a name="\(.*\)"><h1>.*<em>\(.*\)<\/em><\/h1><\/a>/<a name="\2"<\/a>/i' | sed '/<\/body>/,$d' > all_measurements.html
+sed  '1,/<A NAME=/d' measurements.html  | sed -e 's/<a name="\(.*\)"><h1>.*<em>\(.*\)<\/em>.*/<a name="\2"<\/a>/i' | sed '/<\/body>/,$d' > all_measurements.html
 
 #
 # Add full results to temp1.html, saving output to final docs/index.html
