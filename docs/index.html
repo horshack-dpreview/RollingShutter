@@ -15,7 +15,9 @@
             /* prevent rendering of table and detailed results until after DataTables has finished init */
             display: none;
         }
-
+        .highlighted_row {
+            background-color: #ffb3b3 !important;
+        }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
@@ -10132,6 +10134,43 @@
         "initComplete": function(){ 
             $("#readout_times").show(); 
             $("#detailed_measurements").css("display", "block");
+
+            //
+            // process optional URL parameters, which include:
+            //
+            //    model   - Models to highlight in red. Model specified is regex
+            //    sort    - Sort by specified column header text, ascending
+            //    sortdsc - Sort by specified column header text, descending 
+            //
+            // Examples:
+            //      ?model=leica.*
+            //      ?model=leica.*&model=Nikon%20Zf
+            //      ?sort=Model
+            //
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            urlParams.forEach((value, key) => {
+                console.log(value, key);
+                if (key.match(/.*model.*/i)) {
+                    const regexModel = new RegExp(`${value}`, 'i');
+                    $("#readout_times tr").not(":first").filter(function(index) {
+                        const tdText = $(this).find("td:first")[0].innerText;
+                        return regexModel.test(tdText);
+                    }).addClass("highlighted_row");
+                } else if (key.match(/sort/i)) {
+                    const dsc = key.match(/dsc/i); // descending if 'dsc' anywhere in key string, otherwise asc
+                    const regexColumn = new RegExp(`${value}`, 'i');
+                    $("#readout_times tr th").each(function(index) {
+                        const thText = this.innerText;
+                        if (regexColumn.test(thText)) {
+                            $("#readout_times").DataTable().order([index, dsc ? 'dsc' : 'asc']).draw();
+                            return false;
+                        }
+                        return true;
+                    });
+
+                }
+             });
         }
     } );
       
