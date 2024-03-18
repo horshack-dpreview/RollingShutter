@@ -76,14 +76,16 @@
             //
             // process optional URL parameters, which include:
             //
-            //    model   - Models to highlight in red. Model specified is regex
-            //    sort    - Sort by specified column header text, ascending
-            //    sortdsc - Sort by specified column header text, descending 
+            //    model         - Models to highlight in red. Model specified is regex
+            //    sort          - Sort by specified column header text, ascending
+            //    sortdsc       - Sort by specified column header text, descending 
+            //    displayformat - second|seconds|sec|secs or millisecond|milliseconds|ms
             //
             // Examples:
             //      ?model=leica.*
             //      ?model=leica.*&model=Nikon%20Zf
             //      ?sort=Model
+            //      ?displayformat=ms
             //
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
@@ -107,6 +109,14 @@
                         return true;
                     });
 
+                } else if (key.match(/displayFormat/i)) {
+                    if (value.match(/^second[s]?$|^sec[s]?$/)) {
+                        $('#timeDisplayFormat').prop('selectedIndex', 0)
+                        $("#readout_times").DataTable().rows().invalidate("data").draw();
+                    } else if (value.match(/^millisecond[s]?$|^ms$/)) {
+                        $('#timeDisplayFormat').prop('selectedIndex', 1)
+                        $("#readout_times").DataTable().rows().invalidate("data").draw();
+                    }
                 }
              });
         }
