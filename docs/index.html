@@ -10111,7 +10111,10 @@
         bInfo : false,
         searching: true,
         "oLanguage": {
-           "sSearch": "Filter:"
+           "sSearch": "RegEx Filter:"
+        },
+        search: {
+            regex: true
         },
         order: [[0, 'asc']],
         columnDefs: [
@@ -10142,12 +10145,14 @@
             //    sort          - Sort by specified column header text, ascending
             //    sortdsc       - Sort by specified column header text, descending 
             //    displayformat - second|seconds|sec|secs or millisecond|milliseconds|ms
+            //    filter        - Filter (searhc) results by specified regex
             //
             // Examples:
-            //      ?model=leica.*
+            //      ?model=leica
             //      ?model=leica.*&model=Nikon%20Zf
             //      ?sort=Model
             //      ?displayformat=ms
+            //      ?filter=Canon|Nikon
             //
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
@@ -10179,6 +10184,8 @@
                         $('#timeDisplayFormat').prop('selectedIndex', 1)
                         $("#readout_times").DataTable().rows().invalidate("data").draw();
                     }
+                } else if (key.match(/filter/i)) {
+                    $("#readout_times").DataTable().search(value).draw();
                 }
              });
         }
