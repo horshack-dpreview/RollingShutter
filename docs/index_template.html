@@ -19,6 +19,9 @@
         .highlighted_row {
             background-color: #ffb3b3 !important;
         }
+        table#readout_times.dataTable tbody tr:hover {
+            background-color: #b3ccff !important;
+        }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
@@ -133,6 +136,9 @@
       
     $('#timeDisplayFormat').on('change', function() {
       $("#readout_times").DataTable().rows().invalidate("data").draw();
+    });
+    $("#readout_times tbody tr").on('click', function() {
+        $(this).toggleClass("highlighted_row");
     });
   </script>
 </body>
