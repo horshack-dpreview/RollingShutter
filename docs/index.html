@@ -23,6 +23,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>  
+    <script src="https://cdn.datatables.net/plug-ins/2.0.1/sorting/absolute.js"></script>  
 </head>
 
 <body>
@@ -10832,7 +10833,7 @@
         order: [[0, 'asc']],
         columnDefs: [
         {
-            type: 'num',
+            type: $.fn.dataTable.absoluteOrderNumber( [ { value: '', position: 'bottom' } ]), // https://datatables.net/plug-ins/sorting/absolute
             target: [1,2,3,4,5,6,7,8,9,10,11],
             render: function (data, type, row) {
                 let displayFormat = $("#timeDisplayFormat").val();
