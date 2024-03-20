@@ -10840,6 +10840,7 @@
         {
             type: $.fn.dataTable.absoluteOrderNumber( [ { value: '', position: 'bottom' } ]), // https://datatables.net/plug-ins/sorting/absolute
             target: [1,2,3,4,5,6,7,8,9,10,11],
+            className: 'dt-right',
             render: function (data, type, row) {
                 let displayFormat = $("#timeDisplayFormat").val();
                   // note we exclude type == "sort" from our formatting below so that sorting always occurs on millisecond values
