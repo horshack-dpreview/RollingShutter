@@ -1,3 +1,4 @@
+
 # Rolling Shutter
 Compilation of rolling shutter camera sensor readout speed measurements for various cameras, plus the technique and tools used to generate it
 
@@ -65,9 +66,29 @@ The number of visible bands is a function of the cycling frequency of the light 
  - The duration of each light state transition is 1000ms/120, or 8.33ms
  - The full-sensor readout is 50ms, which means it captures 50ms/8.33ms number of light transitions, which is 6, thus the photo will exhibit 6 visibly-distinguishable bands of light
 
-Note that changing shutter speed only reduces the visibility of banding when it's slower than the cycling rate of the light and when the camera's exposure is temporally aligned with the phases of the light's cycles. In the above example, a shutter speed of 1/30 will start reducing the effects of banding, with slower shutters reducing it further. This is because the intensity of the captured light cycles start averaging out and becoming less noticeable.
-
 Based on the above relationship between light cycle frequency and sensor readout time, we can calculate the other when one is known. For example, if we know the light source is 60Hz (120 transitions/second) and the sensor captures 6 bands, we can calculate the sensor readout time via 1000/120*6, which is 50ms. Alternatively, if we know the sensor readout time is 50ms, we can calculate the light's cycling frequency via 1000/(50/6)*2.
+
+### Effect of Shutter Speed on Banding
+It may seem counterintuitive but changing the shutter speed does not affect the number of bands in the image - it only affects the appearance of the bands. At fast shutter speeds the bands will have clear and distinct borders, with light and dark bands of near-equal height. This is because each sensor row is capturing exactly one 1/2 cycle of light, either ON or OFF, including rows that are captured near ON<->OFF light transitions. At slower shutter speeds the band borders get softer and the dark bands get smaller. This is because sensor rows start capturing multiple 1/2 cycle's of light, such that most rows are integrating while the light source is both ON and OFF, with very few rows capturing an all-ON or all-OFF light state.
+
+To demonstrate, here is a 1/4000 vs 1/1000 capture, using two-LEDs that each cycle at 500Hz out of phase to each other, ie one LED is on for 1ms while the other is off for that period, switching roles every 1ms. 
+
+<p align="center">
+  <img src="https://photos.smugmug.com/photos/i-TRxJGCh/0/CKnZwzZKL7T9XkR8tzphpD2GkcwKTSM3HnkPxQbLk/XL/i-TRxJGCh-XL.jpg" />
+</p>
+
+And here is a depiction of the timing intersections between light cycles and sensor row readouts, to further demonstrate how the shutter speed affects both the sharpness of bands and the size of the OFF bands:
+
+1/2000:
+<p align="center">
+  <img src="https://photos.smugmug.com/photos/i-wSS53gj/0/hzh6gbwQ8WXJTm7NPm7rBL6n89rR57tkjTz4Dr4G/O/i-wSS53gj.png" />
+</p>
+1/1000:
+<p align="center">
+  <img src="https://photos.smugmug.com/photos/i-2Q8rNXQ/0/CHHtDpcxnJNs4qBdkmZL4xCJr88v5ZQqcmPJPsj5b/O/i-2Q8rNXQ.png" />
+</p>
+
+Note that as the shutter speed is slowed further and approaches the readout speed the bands start to become indistinguishable. This is because the brightness difference of missing one cycle of light at slow shutter speeds has a commensurately smaller effect since one cycle represents a smaller percentage of the total light the bands are receiving.
 
 ## Measuring Methodology
 In 2018 a1ex at Magic Lantern took [Jim Kasson's original Z7 sensor readout method](https://blog.kasson.com/nikon-z6-7/how-fast-is-the-z7-silent-shutter/) and [applied it to measure various Canon bodies](https://www.magiclantern.fm/forum/index.php?topic=23040). For higher precision and easier reproducibility, a1ex cycled an LED on an Arduino board, whose frequency can be carefully controlled. He chose 500 Hz (1000 toggles/second). This frequency is convenient because it creates a simple 1ms per-transition relationship. This repository contains measurements on various cameras using a1ex's source code running on a [ELEGOO UNO R3 Board ATmega328](https://www.amazon.com/dp/B01EWOE0UU). 
