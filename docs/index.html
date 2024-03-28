@@ -41,6 +41,7 @@
         <option value="sec">secs (1/x)</option>
         <option value="ms">milliseconds</option>
     </select>
+    <button id="createlink" type="button">Generate link to clipboard</button>
 </div>
 
 <!-- TABLE -->
@@ -611,6 +612,13 @@
 	</tbody>
 </table>
 <div id="detailed_measurements">
+
+    <ul>
+        <li>Click on model link to see detailed measurements</li>
+        <li>Click on model row to toggle highlighting for that model</li>
+        <li>Filter entry supports regular and free-form expressions. Ex: (Canon|Nikon)</li>
+        <li>Click 'generate link' to create link with highlighted cameras, filter entry, and sec/ms display</li>
+    </ul>
 
     <p>Note the measurements in the above table are for the highest-quality setting for each respective category. For Photo that means raw photos with the highest bit depth and least amount of compression, which generally means single-shot mode at low ISO. For Video that means oversampled mode (if available), highest bit depth and best chroma subsampling, etc... Consult the detailed measurements below to see readout rates for alternate quality settings.</p> 
 <!-- ALL_MEASUREMENTS -->
@@ -13096,6 +13104,42 @@
     });
     $("#readout_times tbody tr").on('click', function() {
         $(this).toggleClass("highlighted_row");
+    });
+    $("#createlink").on("click", function() {
+
+        let url = document.URL;
+        let params = {};
+
+        // parameter for display of secs or milliseconds
+        params["displayFormat"] = $("#timeDisplayFormat").val();
+
+        // paramer for search filter, if any
+        const filterTerm = $('#readout_times').DataTable().search();
+        if (filterTerm)
+            params["filter"] = filterTerm; 
+
+        // parameters for model(s) selected
+        let countModelsSelected=0;
+        $("#readout_times tr").not(":first").each(function(index) {
+            if ($(this).hasClass("highlighted_row")) {
+                const textObj = $("td:first", $(this));
+                countModelsSelected++;
+                params[`Model${countModelsSelected}`] = textObj.text();
+            }
+        });
+
+        // build URL with parameters
+        url = url.split('?')[0]; // remove any params from original landing URL
+        const paramsEncoded = $.param(params);
+        if (paramsEncoded)
+            url = `${url}?${paramsEncoded}`;
+
+        // copy URL to clipboard (https://stackoverflow.com/a/30810322)
+        navigator.clipboard.writeText(url).then(function() {
+            ; // success
+        }, function(err) {
+            alert("Error copying generated link to clipboard", url);
+        });
     });
   </script>
 </body>
