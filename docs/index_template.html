@@ -125,7 +125,7 @@
                     $("#readout_times tr th").each(function(index) {
                         const thText = this.textContent;
                         if (regexColumn.test(thText)) {
-                            $("#readout_times").DataTable().order([index, dsc ? 'dsc' : 'asc']).draw();
+                            $("#readout_times").DataTable().order([[index, dsc ? 'dsc' : 'asc']]).draw();
                             return false;
                         }
                         return true;
