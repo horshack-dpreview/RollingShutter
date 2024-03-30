@@ -48,6 +48,7 @@
 <div id="detailed_measurements">
 
     <ul>
+        <li>Click on column header to sort by that column</li>
         <li>Click on model link to see detailed measurements</li>
         <li>Click on model row to toggle highlighting for that model</li>
         <li>Filter entry supports regular and free-form expressions. Ex: (Canon|Nikon)</li>
@@ -97,7 +98,7 @@
             //
             //    model         - Models to highlight in red. Model specified is regex
             //    sort          - Sort by specified column header text, ascending
-            //    sortdsc       - Sort by specified column header text, descending 
+            //    sortdsc/desc  - Sort by specified column header text, descending
             //    displayformat - second|seconds|sec|secs or millisecond|milliseconds|ms
             //    filter        - Filter (searhc) results by specified regex
             //
@@ -119,7 +120,7 @@
                         return regexModel.test(tdText);
                     }).addClass("highlighted_row");
                 } else if (key.match(/sort/i)) {
-                    const dsc = key.match(/dsc/i); // descending if 'dsc' anywhere in key string, otherwise asc
+                    const dsc = key.match(/(dsc|desc)/i); // descending if 'dsc' or 'desc' anywhere in key string, otherwise asc
                     const regexColumn = new RegExp(`${value}`, 'i');
                     $("#readout_times tr th").each(function(index) {
                         const thText = this.textContent;
@@ -154,13 +155,25 @@
     $("#createlink").on("click", function() {
 
         let url = document.URL;
+        let table = $('#readout_times').DataTable();
         let params = {};
 
         // parameter for display of secs or milliseconds
         params["displayFormat"] = $("#timeDisplayFormat").val();
 
+        // parameter for sorting of column. note DataTables supports multiple sort columns
+        // but we only check for the first column sorted, with the presumption that almost
+        // all users will only sort one column at a time
+        let tableOrder = table.order();
+        if (tableOrder[0][1] != '') {
+            let columnSorted = tableOrder[0][0];
+            let sortOrder = tableOrder[0][1]; // 'asc' or 'desc'
+            let th = $("#readout_times tr th");
+            params[`sort${sortOrder}`] = th[columnSorted].textContent;
+        }
+
         // paramer for search filter, if any
-        const filterTerm = $('#readout_times').DataTable().search();
+        const filterTerm = table.search();
         if (filterTerm)
             params["filter"] = filterTerm; 
 
