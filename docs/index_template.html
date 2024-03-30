@@ -183,7 +183,7 @@
             if ($(this).hasClass("highlighted_row")) {
                 const textObj = $("td:first", $(this));
                 countModelsSelected++;
-                params[`Model${countModelsSelected}`] = textObj.text();
+                params[`Model${countModelsSelected}`] = `^${textObj.text()}$`;
             }
         });
 
