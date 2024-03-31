@@ -10,14 +10,13 @@
 #
 # Ref: https://wiki.documentfoundation.org/ReleaseNotes/7.2#Document_Conversion
 #
-soffice --headless --convert-to csv:"Text - txt - csv (StarCalc)":44,34,UTF8,1,,0,false,true,false,false,false,2 measurements.ods
+soffice --headless --convert-to csv:"Text - txt - csv (StarCalc)":44,34,UTF8,1,,0,false,true,false,false,false,2 results/measurements.ods
 
 #
 # Run our awk script to convert the CSV into an HTML table formatted for use by 
 # the datatables library (https://datatables.net/)
 #
 awk -f csv_to_table.awk 'measurements-Combined Results (Full-Sensor, ms).csv' > table.txt
-
 
 #
 # Add results table to skeleton index.html source, saving output to temp1.html
@@ -30,7 +29,7 @@ sed '/<!-- TABLE -->/r table.txt' docs/index_template.html > temp1.html
 # anonymous values like table05 to values matching the sheet name, which allows us to create links to
 # each camera-specific sheet
 #
-soffice --headless --convert-to html measurements.ods 
+soffice --headless --convert-to html results/measurements.ods 
 sed  '1,/<A NAME=/d' measurements.html  | sed -e 's/<a name="\(.*\)"><h1>.*<em>\(.*\)<\/em>.*/<a name="\2"<\/a>/i' | sed '/<\/body>/,$d' > all_measurements.html
 
 #
@@ -38,6 +37,10 @@ sed  '1,/<A NAME=/d' measurements.html  | sed -e 's/<a name="\(.*\)"><h1>.*<em>\
 #
 sed '/<!-- ALL_MEASUREMENTS -->/r all_measurements.html' temp1.html > docs/index.html
 
+#
+# generate json version of full-sensor readout measurements
+# 
+cat table.txt | ./html_table_to_json.py | jq .[]  > results/full_sensor.json
 
 #
 # Cleanup temporary files
