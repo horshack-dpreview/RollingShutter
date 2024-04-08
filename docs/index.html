@@ -13426,6 +13426,10 @@
     $('#timeDisplayFormat').on('change', function() {
       $("#readout_times").DataTable().rows().invalidate("data").draw();
     });
+    $('#readout_times tbody tr a').click(function(event) {
+        // so that clicks on model link wont trigger click event for row highlight logic
+        event.stopPropagation();
+    });
     $("#readout_times tbody tr").on('click', function() {
         $(this).toggleClass("highlighted_row");
     });
