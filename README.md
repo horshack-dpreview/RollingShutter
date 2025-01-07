@@ -118,7 +118,7 @@ I have automated this calculation in the LibreOffice Calc spreadsheet included i
 </p>
 The green cells are entered values. The yellow cells are calculated by the spreadhseet using the above formulas. To add a new camera I simply duplicate one of the existing camera sheet tabs and overwrite the contents with the new camera's measurement.
 
-To measure video readout rates I record a short video clip of each major resolution/frame rate then use the scripts in the tool folder of this repository to invokve ffmpeg to extract the first i-frame from each video as a PNG, then measure that PNG in Photoshop the same as I do for still images.
+To measure video readout rates I record a short video clip of each major resolution/frame rate then use the scripts in the tool folder of this repository to involve ffmpeg to extract the first i-frame from each video as a PNG, then measure that PNG in Photoshop the same as I do for still images.
 
 ### Lens Corrections
 It's critical to disable lens corrections when using LED images for readout measurements, particularly geometric distortion correction. This is because the banding we're measuring is a sensor phenomena, not optical - the projection of perfectly-horizontal bands in the resulting image is not from the lens but from the horizontal orientation of pixel rows on the sensor interacting with the rolling shutter readout of those rows. If we allow the camera or post-processing software to apply a geometric correction profile to these images it will create an inverse correction, for example turning pincushion distortion into barrel distortion (or vice versa), because it's applying correction to an already distortion-free image. Here's an animation demonstrating this effect (Nikon Z6 with 24-70 f/4 Z):
