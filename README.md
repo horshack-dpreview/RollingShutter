@@ -57,7 +57,6 @@ But what about situations where a subject in the scene is moving quickly esp hor
 Another situation where the time-shifted nature of rolling shutters can create noticeable image artifacts are photographs under artificial light. Although not visible to the human eye, most artificial light sources are constantly cycling between on and off illumination states, either as a consequence of the nature of [alternating current](https://en.wikipedia.org/wiki/Alternating_current) that powers them or because of the [circuit design](https://en.wikipedia.org/wiki/Pulse-width_modulation) within the light's electronics. Because rolling shutters capture different moments in time vertically across rows of the sensor, they can capture different states of these light cycles across those rows. This means the light source will be captured near its peak intensity on some sensor rows and at its lowest intensity (off) on other sensor rows. This manifests are light bands vertically across the frame:
 
 <p align="center">
-  <img src="https://photos.smugmug.com/photos/i-XMvVGGn/0/FHGCHjpTqWjkBSVwtmCh3zJR82M3NxW2VNMrbZJTh/O/i-XMvVGGn.png" />
   <img src="docs/img/Rolling_vs_Global_Shutter_Cycling_LED.png" />
  
 </p>
@@ -76,7 +75,6 @@ It may seem counterintuitive but changing the shutter speed does not affect the 
 To demonstrate, here is a 1/4000 vs 1/1000 capture, using two-LEDs that each cycle at 500Hz out of phase to each other, ie one LED is on for 1ms while the other is off for that period, switching roles every 1ms. 
 
 <p align="center">
-  <img src="https://photos.smugmug.com/photos/i-TRxJGCh/0/CKnZwzZKL7T9XkR8tzphpD2GkcwKTSM3HnkPxQbLk/XL/i-TRxJGCh-XL.jpg" />
   <img src="docs/img/Arduino_Two_LEDS_Alternating.jpg" />
  
 </p>
@@ -85,13 +83,11 @@ And here is a depiction of the timing intersections between light cycles and sen
 
 1/2000:
 <p align="center">
-  <img src="https://photos.smugmug.com/photos/i-wSS53gj/0/hzh6gbwQ8WXJTm7NPm7rBL6n89rR57tkjTz4Dr4G/O/i-wSS53gj.png" />
   <img src="docs/img/Sensor_Readout_vs_Shutter_Speed_1_2000.png" />
  
 </p>
 1/1000:
 <p align="center">
-  <img src="https://photos.smugmug.com/photos/i-2Q8rNXQ/0/CHHtDpcxnJNs4qBdkmZL4xCJr88v5ZQqcmPJPsj5b/O/i-2Q8rNXQ.png" />
   <img src="docs/img/Sensor_Readout_vs_Shutter_Speed_1_1000.png" />
 </p>
 
@@ -110,7 +106,6 @@ Here are the steps I use for calculating the sensor readout rate:
 For example, here's an image of the Arduino LED taken with a Nikon Z6 in 14-bit raw mode, overlaid with the Photoshop measuring tool, Info panel, and Image Size dialog:
 
 <p align="center">
-  <img src="https://photos.smugmug.com/photos/i-h9xFC3S/0/bRHnZJkjSxzBWqz7vk9tDNVXZKrHR7G6sbwgcjKD/O/i-h9xFC3S.jpg" />
   <img src="docs/img/How_I_Measure_1.jpg" />
 </p>
 
@@ -122,7 +117,6 @@ Notice I didn't include the bands at the very top and bottom of the image in the
 
 I have automated this calculation in the LibreOffice Calc spreadsheet included in this repository, which has one sheet for every camera measured: 
 <p align="center">
-  <img src="https://photos.smugmug.com/photos/i-XpznsVD/0/DshXnVRdv263j3G8WtJJHpdtJzhXvW82vnf8BwXk3/O/i-XpznsVD.png" />
   <img src="docs/img/Arduino_Measurement_Spreadsheet_Example.png" />
  
 </p>
@@ -133,7 +127,6 @@ To measure video readout rates I record a short video clip of each major resolut
 ### Lens Corrections
 It's critical to disable lens corrections when using LED images for readout measurements, particularly geometric distortion correction. This is because the banding we're measuring is a sensor phenomena, not optical - the projection of perfectly-horizontal bands in the resulting image is not from the lens but from the horizontal orientation of pixel rows on the sensor interacting with the rolling shutter readout of those rows. If we allow the camera or post-processing software to apply a geometric correction profile to these images it will create an inverse correction, for example turning pincushion distortion into barrel distortion (or vice versa), because it's applying correction to an already distortion-free image. Here's an animation demonstrating this effect (Nikon Z6 with 24-70 f/4 Z):
 <p align="center">
-  <img src="https://photos.smugmug.com/photos/i-JrSPpZC/0/Cz23sWx5V9QQ2DwXx46LS8R7xH2NcT2QvQf5vZVcK/O/i-JrSPpZC.png" />
   <img src="docs/img/LED_Distortion_From_Lens_Corrections.png" />
 </p>
 Notice how the lens correction is inducing barrel distortion in this image of a cycling light. This causes the LED bands to be stretched apart, introducing error into our band-size/count measurements. Disabling corrections is especially important for video and jpegs because the correction is baked into the image, whereas the correction on raw images can be disabled in post for most cameras.
@@ -160,7 +153,6 @@ An alternative to concerning ourselves with lens corrections is to use a lens th
  - A macro lens is ideal, since you will be photographing/video recording the small amber LED on the board, circled in red below:
 
 <p align="center">
-  <img src="https://photos.smugmug.com/photos/i-HKm3Qjw/0/jJh6BSPgQ9CHsbfQrhM8nH9R7MLCfCvzsSg9HPqg/L/i-HKm3Qjw-L.jpg" />
   <img src="docs/img/Photo_Of_Arduino.jpg" />
 </p>
 
@@ -172,7 +164,6 @@ An alternative to concerning ourselves with lens corrections is to use a lens th
  - Tripod is ideal although not essential. Position the camera+lens as close as possible to the board, being careful not to scratch your front element on the pins protruding from the board. Center the framing around the illuminated amber light on the board (**not the green LED**). Ideally the full amber LED will be framed, without cutting off the top or bottom edges of the circular projection within the frame. But a partial framing is acceptable as well - just try to get the LED as large as possible within the frame. Here is an example of an ideally-framed LED:
 
 <p align="center">
-  <img src="https://photos.smugmug.com/photos/i-JPRhPN5/0/FNXkCcHg6xC6Hf4zZCSzx8Fh7mCbHZBfvN7jK5bFh/O/i-JPRhPN5.jpg" />
   <img src="docs/img/CameraSensorReadoutLEDIdealFraming.jpg" />
 </p>
 
