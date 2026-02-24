@@ -58,6 +58,8 @@ Another situation where the time-shifted nature of rolling shutters can create n
 
 <p align="center">
   <img src="https://photos.smugmug.com/photos/i-XMvVGGn/0/FHGCHjpTqWjkBSVwtmCh3zJR82M3NxW2VNMrbZJTh/O/i-XMvVGGn.png" />
+  <img src="docs/img/Rolling_vs_Global_Shutter_Cycling_LED.png" />
+ 
 </p>
 
 The number of visible bands is a function of the cycling frequency of the light vs the full-sensor readout rate. The faster the light cycles and/or the slower the sensor readout, the greater the number of bands that will be visible in the full image. For example, a sensor with a full readout rate of 50ms (1/20) shooting a light source switching states 120 times/second (based on the North American AC rate of 60Hz),  the sensor will capture 6 noticeable bands of light. Here's the math:
@@ -75,6 +77,8 @@ To demonstrate, here is a 1/4000 vs 1/1000 capture, using two-LEDs that each cyc
 
 <p align="center">
   <img src="https://photos.smugmug.com/photos/i-TRxJGCh/0/CKnZwzZKL7T9XkR8tzphpD2GkcwKTSM3HnkPxQbLk/XL/i-TRxJGCh-XL.jpg" />
+  <img src="docs/img/Arduino_Two_LEDS_Alternating.jpg" />
+ 
 </p>
 
 And here is a depiction of the timing intersections between light cycles and sensor row readouts, to further demonstrate how the shutter speed affects both the sharpness of bands and the size of the OFF bands:
@@ -82,10 +86,13 @@ And here is a depiction of the timing intersections between light cycles and sen
 1/2000:
 <p align="center">
   <img src="https://photos.smugmug.com/photos/i-wSS53gj/0/hzh6gbwQ8WXJTm7NPm7rBL6n89rR57tkjTz4Dr4G/O/i-wSS53gj.png" />
+  <img src="docs/img/Sensor_Readout_vs_Shutter_Speed_1_2000.png" />
+ 
 </p>
 1/1000:
 <p align="center">
   <img src="https://photos.smugmug.com/photos/i-2Q8rNXQ/0/CHHtDpcxnJNs4qBdkmZL4xCJr88v5ZQqcmPJPsj5b/O/i-2Q8rNXQ.png" />
+  <img src="docs/img/Sensor_Readout_vs_Shutter_Speed_1_1000.png" />
 </p>
 
 Note that as the shutter speed is slowed further and approaches the readout speed the bands start to become indistinguishable. This is because the brightness difference of missing one cycle of light at slow shutter speeds has a commensurately smaller effect since one cycle represents a smaller percentage of the total light the bands are receiving.
@@ -104,6 +111,7 @@ For example, here's an image of the Arduino LED taken with a Nikon Z6 in 14-bit 
 
 <p align="center">
   <img src="https://photos.smugmug.com/photos/i-h9xFC3S/0/bRHnZJkjSxzBWqz7vk9tDNVXZKrHR7G6sbwgcjKD/O/i-h9xFC3S.jpg" />
+  <img src="docs/img/How_I_Measure_1.jpg" />
 </p>
 
 Notice I didn't include the bands at the very top and bottom of the image in the measurement, as those aren't full-sized bands due to the elliptical projection of the LED. The measured height of the bands I included is 3642 pixels, shown in the Info pane. I then visually count the number of bands spanned by the measurement, which in this case is 23. Note that a "band" for this calculation is defined as a full cycle (Hz), meaning pairs of light/dark areas, each representing a transition of off->on->off. This is done because the duty cycle of the LED  may not be balanced 50% between on/off, due to alignment of the shutter speed relative to the phase of the light cycle, meaning the height of the light and dark areas may differ. Here is the calculation:
@@ -115,6 +123,8 @@ Notice I didn't include the bands at the very top and bottom of the image in the
 I have automated this calculation in the LibreOffice Calc spreadsheet included in this repository, which has one sheet for every camera measured: 
 <p align="center">
   <img src="https://photos.smugmug.com/photos/i-XpznsVD/0/DshXnVRdv263j3G8WtJJHpdtJzhXvW82vnf8BwXk3/O/i-XpznsVD.png" />
+  <img src="docs/img/Arduino_Measurement_Spreadsheet_Example.png" />
+ 
 </p>
 The green cells are entered values. The yellow cells are calculated by the spreadhseet using the above formulas. To add a new camera I simply duplicate one of the existing camera sheet tabs and overwrite the contents with the new camera's measurement.
 
@@ -124,6 +134,7 @@ To measure video readout rates I record a short video clip of each major resolut
 It's critical to disable lens corrections when using LED images for readout measurements, particularly geometric distortion correction. This is because the banding we're measuring is a sensor phenomena, not optical - the projection of perfectly-horizontal bands in the resulting image is not from the lens but from the horizontal orientation of pixel rows on the sensor interacting with the rolling shutter readout of those rows. If we allow the camera or post-processing software to apply a geometric correction profile to these images it will create an inverse correction, for example turning pincushion distortion into barrel distortion (or vice versa), because it's applying correction to an already distortion-free image. Here's an animation demonstrating this effect (Nikon Z6 with 24-70 f/4 Z):
 <p align="center">
   <img src="https://photos.smugmug.com/photos/i-JrSPpZC/0/Cz23sWx5V9QQ2DwXx46LS8R7xH2NcT2QvQf5vZVcK/O/i-JrSPpZC.png" />
+  <img src="docs/img/LED_Distortion_From_Lens_Corrections.png" />
 </p>
 Notice how the lens correction is inducing barrel distortion in this image of a cycling light. This causes the LED bands to be stretched apart, introducing error into our band-size/count measurements. Disabling corrections is especially important for video and jpegs because the correction is baked into the image, whereas the correction on raw images can be disabled in post for most cameras.
 
@@ -141,7 +152,7 @@ An alternative to concerning ourselves with lens corrections is to use a lens th
  5. Go to File -> Open and open the source code module downloaded in step #3. Answer Yes when prompted to move the file inside a sketch folder named the same as the module and asked if you'd like to create the file, and move the file.
  6. Attach the Arduino board to your computer via the included USB cable
  7. Click the "Select Board" dropdown at the top of the IDE and select the one item in the list corresponding to the board you've just attached
- 8. Click the [rightward-facing arrow at the top of the window](https://photos.smugmug.com/photos/i-XmSR7ck/0/DVHKh3bTGQZ4qnBK2ZJK8KHNBMwd7HGZzf8RnPkH9/O/i-XmSR7ck.png) to compile and flash the LED toggling module to your board. It should complete within 30 seconds. To verify the logic is running, go to Tools -> Serial Monitor and set the baud rate to 115,200. You should see a " Starting...500 Hz (1000 toggles/sec)" message, preceded by a timestamp. If not, cycle power on the board to restart it.
+ 8. Click the [rightward-facing arrow at the top of the window](docs/img/Arduino_IDE_Upload_Code.png) to compile and flash the LED toggling module to your board. It should complete within 30 seconds. To verify the logic is running, go to Tools -> Serial Monitor and set the baud rate to 115,200. You should see a " Starting...500 Hz (1000 toggles/sec)" message, preceded by a timestamp. If not, cycle power on the board to restart it.
  9. Once the module has been flashed to the board you no longer need to attach the board to the computer for the logic to run - it will run automatically whenever power is supplied to the board, which you can do with any USB power supply.
 
 ### Test Setup
@@ -150,6 +161,7 @@ An alternative to concerning ourselves with lens corrections is to use a lens th
 
 <p align="center">
   <img src="https://photos.smugmug.com/photos/i-HKm3Qjw/0/jJh6BSPgQ9CHsbfQrhM8nH9R7MLCfCvzsSg9HPqg/L/i-HKm3Qjw-L.jpg" />
+  <img src="docs/img/Photo_Of_Arduino.jpg" />
 </p>
 
  - If you don't have a macro lens, choose a lens with either a large magnification factor or one with a long focal length
@@ -161,6 +173,7 @@ An alternative to concerning ourselves with lens corrections is to use a lens th
 
 <p align="center">
   <img src="https://photos.smugmug.com/photos/i-JPRhPN5/0/FNXkCcHg6xC6Hf4zZCSzx8Fh7mCbHZBfvN7jK5bFh/O/i-JPRhPN5.jpg" />
+  <img src="docs/img/CameraSensorReadoutLEDIdealFraming.jpg" />
 </p>
 
 
