@@ -28,7 +28,7 @@ After these row resets have completed, the camera will then allow the sensor to 
 
 What about exposures that take longer than 1/20, ie longer than the full-sensor readout time? In those scenarios the camera simply waits longer before it starts reading the rows after completing the row resets.
 
-What about exposures that are shorter (faster) than the full-sensor readout time, ie > 1/20? In those scenarios the camera actually starts reading rows before it has completed resetting all rows, so that the camera is reading earlier rows at the same time it's still rolling through the progressive reset of later rows. For example, here's what 1/40 (25ms) exposure would look like:
+What about exposures that are shorter (faster) than the full-sensor readout time? In those scenarios the camera actually starts reading rows before it has completed resetting all rows, so that the camera is reading earlier rows at the same time it's still rolling through the progressive reset of later rows. For example, here's what a 1/40 (25ms) exposure would look like on a sensor with a 1/20 (50ms) readout:
 
  - Row #1's pixel values are reset first
  - Row #2's pixel values are reset, 12.5us after row #1's reset
